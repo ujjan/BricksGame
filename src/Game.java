@@ -69,6 +69,50 @@ public class Game extends JPanel implements KeyListener, ActionListener{
         g.fillOval(ballX, ballY, 20, 20);
 
 
+        // score
+
+        g.setColor(Color.black);
+        g.setFont(new Font("serif", Font.BOLD, 25));
+        g.drawString(""+score, 590, 30);
+
+        // Game over
+
+        if(ballY > 570){
+
+            play = false;
+            ballYDir = 0;
+            ballXDir = 0;
+
+            g.setColor(Color.red);
+            g.setFont(new Font("serif", Font.BOLD, 30));
+            g.drawString("Game Over Score is: "+score, 190, 300);
+
+
+            g.setColor(Color.red);
+            g.setFont(new Font("serif", Font.BOLD, 20));
+            g.drawString("Press Enter To Play Again", 230, 350);
+
+        }
+        // you won
+        if(numberOfBricks <= 0){
+
+            play = false;
+            ballYDir = 0;
+            ballXDir = 0;
+
+            g.setColor(Color.red);
+            g.setFont(new Font("serif", Font.BOLD, 30));
+            g.drawString("You Won! Score is: "+score, 190, 300);
+
+
+            g.setColor(Color.red);
+            g.setFont(new Font("serif", Font.BOLD, 20));
+            g.drawString("Press Enter To Play Again", 230, 350);
+
+
+        }
+
+
         g.dispose();
 
     }
@@ -95,6 +139,25 @@ public class Game extends JPanel implements KeyListener, ActionListener{
                 moveLeft();
             }
 
+        }
+
+        if(e.getKeyCode() == KeyEvent.VK_ENTER){
+
+            if(!play){
+
+                play = true;
+                ballX = 120;
+                ballY = 350;
+                ballXDir = -1;
+                ballYDir = -2;
+                playerX = 310;
+                score = 0;
+                numberOfBricks = 21;
+
+                bricksGenerator = new BricksGenerator(3, 7);
+                repaint();
+
+            }
         }
 
     }
